@@ -1,12 +1,8 @@
 package com.binfeng.controller;
 
-import com.binfeng.App;
-import com.binfeng.base.IntegrationTest;
+import base.IntegrationTest;
 import io.restassured.http.ContentType;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;

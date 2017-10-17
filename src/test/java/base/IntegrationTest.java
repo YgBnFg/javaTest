@@ -1,4 +1,4 @@
-package com.binfeng.base;
+package base;
 
 import com.binfeng.App;
 import io.restassured.RestAssured;
@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = App.class)
-public class IntegrationTest {
+public abstract class IntegrationTest {
 
     @LocalServerPort
     int serverPort;
