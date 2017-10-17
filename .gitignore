@@ -1,0 +1,10 @@
+*.iml
+target
+.idea
+*.class
+logs
+webapps
+/data/*
+.classpath
+.project
+.settings
