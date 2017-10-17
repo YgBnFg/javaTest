@@ -1,6 +1,7 @@
 package com.binfeng.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,10 +17,13 @@ public class MainController {
     @Autowired
     private Clock clock;
 
+    @Value(value = "${context}")
+    private String context;
+
     @RequestMapping("/")
     @ResponseBody
     String home() {
         final Date now = new Date(clock.millis());
-        return "Hello World! " + now;
+        return "Hello World! " + now + "in " + context;
     }
 }
