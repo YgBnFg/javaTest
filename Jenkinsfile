@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        bat 'mvn install'
+        bat 'mvn $MAVEN_CLI_OPTS test-compile'
       }
     }
     stage('test') {
