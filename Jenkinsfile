@@ -3,10 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        script {
-          mvn install
-        }
-        
+        bat(script: 'cmd', encoding: 'mvn install')
       }
     }
     stage('test') {
