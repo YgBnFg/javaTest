@@ -17,13 +17,13 @@ public class MainController {
     @Autowired
     private Clock clock;
 
-    @Value(value = "${context}")
-    private String context;
+    @Value("${environment}")
+    private String environment;
 
     @RequestMapping("/")
     @ResponseBody
     String home() {
         final Date now = new Date(clock.millis());
-        return "Hello World! " + now + "in " + context;
+        return "Hello World! " + now + "in " + environment;
     }
 }
