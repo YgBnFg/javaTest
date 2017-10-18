@@ -3,12 +3,12 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'mvn $MAVEN_CLI_OPTS test-compile'
+        sh 'mvn clean install'
       }
     }
     stage('test') {
       steps {
-        sh 'mvn package test'
+        sh 'mvn test'
       }
     }
   }
