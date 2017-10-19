@@ -20,11 +20,18 @@ pipeline {
             steps {
                 sh 'echo BUILD_TAG=$BUILD_TAG'
                 sh 'cp target/$PACKAGENAME.war script/docker/$PACKAGENAME.war'
-                sh 'docker build -t javatest:$BUILD_TAG script/docker'
+                sh 'docker build -t $PACKAGENAME:$BUILD_TAG script/docker'
                 sh 'cd $WORKSPACE'
-                sh 'echo $BUILD_TAG > javatest-tag.txt'
+                sh 'echo $BUILD_TAG > $PACKAGENAME-tag.txt'
             }
         }
+        stage('deploy') [
+            steps {
+                
+                sh 'PERTAGE=`cat $PACKAGENAME-tag.txt`'
+                sh 'echo $PERTAGE'
+            }
+        ]
     }
 
     environment {
