@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn $(MAVEN_CLI_OPTS) test-compile'
+                sh 'mvn $MAVEN_CLI_OPTS test-compile'
             }
         }
         stage('Test') { 
