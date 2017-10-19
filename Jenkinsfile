@@ -13,7 +13,12 @@ pipeline {
         }
         stage('Test') { 
             steps {
-                sh 'mvn test'
+                sh 'mvn package test'
+            }
+        }
+        stage('Publish') {
+            steps {
+                sh 'ls target'
             }
         }
     }
