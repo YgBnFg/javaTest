@@ -1,4 +1,4 @@
 FROM maven:latest
 
-RUN mkdir -p "$~/webapps"
-COPY javatest.war "$~/webapps"
+RUN mkdir -p "~/webapps"
+COPY javatest.war "~/webapps"

@@ -21,8 +21,6 @@ pipeline {
                 sh 'echo BUILD_TAG=$BUILD_TAG'
                 sh 'cp target/$PACKAGENAME.war script/docker/$PACKAGENAME.war'
                 sh 'docker build -t javatest:$BUILD_TAG script/docker'
-                sh 'ls -alh'
-                sh 'docker push javatest:$BUILD_TAG'
                 sh 'cd $WORKSPACE'
                 sh 'echo $BUILD_TAG > javatest-tag.txt'
             }
