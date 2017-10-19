@@ -25,13 +25,13 @@ pipeline {
                 sh 'echo $BUILD_TAG > $PACKAGENAME-tag.txt'
             }
         }
-        stage('deploy') [
+        stage('deploy') {
             steps {
                 
                 sh 'PERTAGE=`cat $PACKAGENAME-tag.txt`'
                 sh 'echo $PERTAGE'
             }
-        ]
+        }
     }
 
     environment {
