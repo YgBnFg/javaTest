@@ -18,7 +18,14 @@ pipeline {
         }
         stage('Publish') {
             steps {
-                sh 'ls target'
+                sh 'echo BUILD_TAG=$BUILD_TAG'
+                sh 'cp target/$PACKAGENAME.war script/docker/$PACKAGENAME.war'
+                sh 'cd script/docker'
+                sh 'docker build -t javatest:$BUILD_TAG .'
+                sh 'ls -alh'
+                sh 'docker push javatest:$BUILD_TAG'
+                sh 'cd $WORKSPACE'
+                sh 'echo $BUILD_TAG > javatest-tag.txt'
             }
         }
     }
@@ -26,5 +33,6 @@ pipeline {
     environment {
         MAVEN_CLI_OPTS = '--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true'
         MAVEN_OPTS = '-Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true'
+        PACKAGENAME = 'javatest'
     }
 }
