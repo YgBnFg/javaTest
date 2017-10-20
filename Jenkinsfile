@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Publish') {
             steps {
-                echo BUILD_TAG=$BUILD_TAG
+                echo 'BUILD_TAG=$BUILD_TAG'
                 sh 'cp target/$PACKAGENAME.war script/docker/$PACKAGENAME.war'
                 sh 'docker build -t $PACKAGENAME:$BUILD_TAG script/docker'
                 sh 'cd $WORKSPACE'
