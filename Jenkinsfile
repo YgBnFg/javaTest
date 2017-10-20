@@ -18,6 +18,9 @@ pipeline {
             }
         }
         stage('Publish') {
+            when {
+                branch 'master'
+            }
             steps {
                 echo 'BUILD_TAG=$BUILD_TAG'
                 sh 'cp target/$PACKAGENAME.war script/docker/$PACKAGENAME.war'
@@ -27,8 +30,11 @@ pipeline {
             }
         }
         stage('deploy') {
+            when {
+                branch 'master'
+            }
             steps {
-                sh 'bash script/deploy.sh local'
+                sh 'bash script/deploy.sh dev'
             }
         }
     }
