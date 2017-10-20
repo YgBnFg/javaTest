@@ -29,8 +29,7 @@ pipeline {
         stage('deploy') {
             steps {
                 sh 'PERTAGE=`cat $PACKAGENAME-tag.txt` && echo $PERTAGE'
-                def LASTRUNER='`docker ps -q -f name=$PACKAGENAME`'
-                echo '${LASTRUNER}'
+                sh 'docker kill $(docker ps -q -f name=$PACKAGENAME)'
                 sh 'docker run --rm --name $PACKAGENAME -p $RUNPORT:8080 $PACKAGENAME:$BUILD_TAG'
             }
         }
