@@ -28,7 +28,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                sh 'bash script/deploy.sh'
+                sh 'bash script/deploy.sh local'
             }
         }
     }
