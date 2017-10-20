@@ -14,11 +14,12 @@ pipeline {
         stage('Test') { 
             steps {
                 sh 'mvn package test'
+                archiveArtifacts artifacts:'target/*.jar','target/*.war'
             }
         }
         stage('Publish') {
             steps {
-                sh 'echo BUILD_TAG=$BUILD_TAG'
+                echo BUILD_TAG=$BUILD_TAG
                 sh 'cp target/$PACKAGENAME.war script/docker/$PACKAGENAME.war'
                 sh 'docker build -t $PACKAGENAME:$BUILD_TAG script/docker'
                 sh 'cd $WORKSPACE'
@@ -28,13 +29,8 @@ pipeline {
         stage('deploy') {
             steps {
                 sh 'PERTAGE=`cat $PACKAGENAME-tag.txt` && echo $PERTAGE'
-                sh 'echo $PERTAGE'
-                sh 'LASTRUNER=`docker ps -q -f name=$PACKAGENAME` && echo $LASTRUNER'
-                sh 'echo $LASTRUNER'
-                script {
-                    if($LASTRUNER!=null||$LASTRUNER!="") {
-                        sh 'docker kill $LASTRUNER'
-                    }
+                success {
+                    sh 'docker kill $(docker ps -q -f name=$PACKAGENAME`)'
                 }
                 sh 'docker run --rm --name $PACKAGENAME -p $RUNPORT:8080 $PACKAGENAME:$BUILD_TAG'
 
