@@ -31,9 +31,6 @@ pipeline {
                 sh 'PERTAGE=`cat $PACKAGENAME-tag.txt` && echo $PERTAGE'
                 def LASTRUNER='`docker ps -q -f name=$PACKAGENAME`'
                 echo '${LASTRUNER}'
-                if(LASTRUNER!=null||LASTRUNER!="") {
-                    sh 'docker kill ${LASTRUNER}'
-                }
                 sh 'docker run --rm --name $PACKAGENAME -p $RUNPORT:8080 $PACKAGENAME:$BUILD_TAG'
             }
         }
