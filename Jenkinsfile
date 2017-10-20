@@ -14,7 +14,7 @@ pipeline {
         stage('Test') { 
             steps {
                 sh 'mvn package test'
-                archiveArtifacts artifacts:'target/*.jar','target/*.war'
+                archiveArtifacts artifacts:'target/*.war'
             }
         }
         stage('Publish') {
